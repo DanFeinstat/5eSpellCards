@@ -1,5 +1,6 @@
 $(document).ready(function(){
   let cardNum = 0;
+  let classSelection = $('#classContainer').html();
     //click on class button to bring up correct cardback
     $('#classContainer').on('click','.classBtn',function(){
       cardNum ++;
@@ -11,8 +12,20 @@ $(document).ready(function(){
         </div></div>' ).one('webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend',function(){
           $('.currentCard').removeClass('animated bounceInRight');
           $('#card_'+cardNum+'_img').attr('class','card-img front');
-          $('#flipper').append('<div class="back bg-primary"></div>')
-        })//one closes
+          $('#flipper').append('<div class="back bg-primary"></div>');
+          $('#classContainer').attr('class', 'animated zoomOutUp').one('webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend',function(){
+            $('#classContainer').empty();
+            $('#classContainer').removeClass('animated zoomOutUp');
+            $('#classContainer').append(
+              '<form>\
+                  <div class="form-group">\
+                    <label for="spellNameInput">Mystical Tutor</label>\
+                      <input type="text" class="form-control" id="spellNameInput" placeholder="Enter Spell Name Here">\
+                  </div>\
+                  <button type="submit" class="btn btn-dark">Submit</button>\
+                </form>');
+          })//form entry .one animation closes
+        })//current card .one event closes
       })//onclick even closes
 
     $('#cardDisplay_Main').on('click','.currentCard',function(){

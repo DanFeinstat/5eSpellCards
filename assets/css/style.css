@@ -1,6 +1,13 @@
 .btn{
+  max-height:45px;
   margin:1em 1em 1em 1em;
 }
+
+#classContainer{
+  min-height:20vh;
+}
+
+/*the CSS below is for the card flipping animation*/
 .currentCard{
   perspective:1000px;
 }
