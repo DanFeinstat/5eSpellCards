@@ -10,7 +10,16 @@
   <body>
     <div class="container">
 
-      <div class="row">
+      <div class="row" id="classContainer">
+        <p>Please select a class:</p>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/bardCard.jpg">Bard</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/clericCard.jpg">Cleric</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/druidCard.jpg">Druid</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/paladinCard.jpg">Paladin</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/rangerCard.jpg">Ranger</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/mageCard.jpg">Sorcerer</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/mageCard.jpg">Warlock</button>
+        <button class="btn classBtn border border-dark" type="button" value="assets/images/mageCard.jpg">Wizard</button>
         <!-- <form class="mb-2">
           <div class="form-group">
             <label for="spellNameInput">Mystical Tutor</label>
@@ -21,10 +30,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 offset-md-4">
-          <div class="card animated bounceInRight">
-            <img class="card-img" src="assets/images/bardCard.jpg" alt="bard card">
-          </div>
+        <div Id="cardDisplay_Main" class="col-md-4 offset-md-4">
         </div>
       </div>
       <div class="spellInfo">
