@@ -7,6 +7,10 @@
   min-height:20vh;
 }
 
+#spellNameInput{
+  text-transform:capitalize;
+}
+
 /*the CSS below is for the card flipping animation*/
 .currentCard{
   perspective:1000px;
@@ -17,7 +21,7 @@
 }
 
 .flipper{
-  transform:rotateY(180deg);
+  transform:rotateY(-180deg);
 }
 
 .flipper {
@@ -45,5 +49,5 @@
 
 /* back, initially hidden pane */
 .back {
-	transform: rotateY(180deg);
+	transform: rotateY(-180deg);
 }

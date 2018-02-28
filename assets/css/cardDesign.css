@@ -1,0 +1,49 @@
+h6{
+  margin-bottom:1px;
+}
+.back{
+  width:500px;
+  height:700px;
+  border:25px solid #782a61;
+  border-radius:5px;
+  background-color:#782a61;
+}
+.nameDisplay{
+  width:100%;
+  height:10%;
+  border-width:5px 5px 10px 5px;
+  border-style: solid;
+  border-color: #782a61;
+  border-radius:10px;
+  padding-top:1em;
+  background-color:#fffff4;
+}
+.materials{
+  color:#fffff2;
+}
+.schoolDisplay{
+  width:50%;
+  height:7%;
+}
+.school{
+  color:#fffff2;
+}
+.isRitual, .ritual{
+  color:white;
+}
+.cardDisplaySpace{
+  padding:0.25em;
+  width:50%;
+  height:10%;
+  border: 3px solid #782a61;
+  border-radius:5px;
+  background-color:#fffff4;
+}
+.cardDescDisplay{
+  width:100%;
+  height:60%;
+  border-top:3px solid #782a61;
+  border-radius:8px;
+  background-color:#fffff4;
+  clear:both;
+}
