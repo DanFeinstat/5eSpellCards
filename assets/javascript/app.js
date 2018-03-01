@@ -2,11 +2,14 @@ $(document).ready(function(){
   let cardNum = 0;
   let classSelection = $('#classContainer').html();
   let spellDisplayed = false;
+  let spellFound = false;
+  let currentClass = "";
 
     //click on class button to bring up correct cardback
     $('#classContainer').on('click','.classBtn',function(){
       cardNum ++;
       var cardClass = $(this).attr('value');
+      currentClass = $(this).text().toLowerCase();
       $('#cardDisplay_Main').empty();
       $('#cardDisplay_Main').append('<div class="card currentCard animated bounceInRight">\
         <div id="flipper">\
@@ -84,7 +87,7 @@ $(document).ready(function(){
       if(spellDisplayed === false){
         spellDisplayed = true;
         let spellName = $('#spellNameInput').val().trim();
-        let queryURL = "http://www.dnd5eapi.co/api/spells"
+        let queryURL = "http://www.dnd5eapi.co/api/spells/"+currentClass;
 
         String.prototype.toTitleCase = function() {
           var i, j, str, lowers, uppers;
@@ -106,22 +109,20 @@ $(document).ready(function(){
           }
           spellName = spellName.toTitleCase();
           console.log(spellName);
+          console.log(queryURL);
         //call for the spell list
         $.ajax({
-          url: queryURL,
+          url:queryURL,
           method:"GET"
         }).then(function(response){
-
           //iterate through spell list for the correct spell and url
           for(var i = 0; i<response.results.length; i++){
             if(response.results[i].name == spellName){
-
+              spellFound = true;
               //call for the specific spell
               $.ajax({
                 url:response.results[i].url,
                 method:"GET"
-
-              //plug in the relevant spell data
               }).then(function(data){
                 $(".name").append(data.name);
                 $(".range").append(data.range);
@@ -133,14 +134,16 @@ $(document).ready(function(){
                 $(".higher_level").append(data.higher_level);
                 $(".school").append(data.school.name);
                 $(".castingTime").append(data.casting_time);
-              })//second then statement closes
-            } //if statement in ajax call closes
+              })//then statement in second ajax call closes
+            }//if statement in first ajax call closes
           }//for loop closes
+          console.log(spellFound);
+          if(spellFound === false){
+            spellDisplayed = false;
+            $('#spell_error_modal').modal('show');
+          }
         })//first then statement closes
       }//if statement boolean check closes
     })//on click submit event closes
 
 })//document.ready closes
-
-//
-// let spellName = "";
