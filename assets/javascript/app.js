@@ -1,6 +1,7 @@
 $(document).ready(function(){
   let cardNum = 0;
   let classSelection = $('#classContainer').html();
+  let spellDisplayed = false;
 
     //click on class button to bring up correct cardback
     $('#classContainer').on('click','.classBtn',function(){
@@ -67,12 +68,11 @@ $(document).ready(function(){
         })//current card .one event closes
       })//onclick even closes
 
+
     //on click of current card it transforms to the content ('.back') div
     $('#cardDisplay_Main').on('click','.currentCard',function(){
       $('#flipper').attr('class', 'flipper');
     })
-
-
 
 
     //accept input from mystical tutor form
@@ -81,60 +81,63 @@ $(document).ready(function(){
     $('#classContainer').on('click','.submitSpell',function(event){
       event.preventDefault();
 
-      let spellName = $('#spellNameInput').val().trim();
-      let queryURL = "http://www.dnd5eapi.co/api/spells"
+      if(spellDisplayed === false){
+        spellDisplayed = true;
+        let spellName = $('#spellNameInput').val().trim();
+        let queryURL = "http://www.dnd5eapi.co/api/spells"
 
-      String.prototype.toTitleCase = function() {
-        var i, j, str, lowers, uppers;
-        str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
+        String.prototype.toTitleCase = function() {
+          var i, j, str, lowers, uppers;
+          str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          });
 
-        // Certain minor words should be left lowercase unless
-        // they are the first or last words in the string
-        lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
-        'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
-        for (i = 0, j = lowers.length; i < j; i++)
-          str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
-            function(txt) {
-              return txt.toLowerCase();
-            });
+          // Certain minor words should be left lowercase unless
+          // they are the first or last words in the string
+          lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
+          'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
+          for (i = 0, j = lowers.length; i < j; i++)
+            str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
+              function(txt) {
+                return txt.toLowerCase();
+              });
 
-            return str;
-        }
-        spellName = spellName.toTitleCase();
-        console.log(spellName);
-      //call for the spell list
-      $.ajax({
-        url: queryURL,
-        method:"GET"
-      }).then(function(response){
+              return str;
+          }
+          spellName = spellName.toTitleCase();
+          console.log(spellName);
+        //call for the spell list
+        $.ajax({
+          url: queryURL,
+          method:"GET"
+        }).then(function(response){
 
-        //iterate through spell list for the correct spell and url
-        for(var i = 0; i<response.results.length; i++){
-          if(response.results[i].name == spellName){
+          //iterate through spell list for the correct spell and url
+          for(var i = 0; i<response.results.length; i++){
+            if(response.results[i].name == spellName){
 
-            //call for the specific spell
-            $.ajax({
-              url:response.results[i].url,
-              method:"GET"
+              //call for the specific spell
+              $.ajax({
+                url:response.results[i].url,
+                method:"GET"
 
-            //plug in the relevant spell data
-            }).then(function(data){
-              $(".name").append(data.name);
-              $(".range").append(data.range);
-              $(".duration").append(data.duration);
-              $(".materials").append(data.material);
-              $(".ritual").append(data.ritual);
-              $(".components").append(data.components);
-              $(".desc").append(data.desc);
-              $(".higher_level").append(data.higher_level);
-              $(".school").append(data.school.name);
-              $(".castingTime").append(data.casting_time);
-            })//second then statement closes
-          } //if statement closes
-        }//for loop closes
-      })//first then statement closes
+              //plug in the relevant spell data
+              }).then(function(data){
+                $(".name").append(data.name);
+                $(".range").append(data.range);
+                $(".duration").append(data.duration);
+                $(".materials").append(data.material);
+                $(".ritual").append(data.ritual);
+                $(".components").append(data.components);
+                $(".desc").append(data.desc);
+                $(".higher_level").append(data.higher_level);
+                $(".school").append(data.school.name);
+                $(".castingTime").append(data.casting_time);
+              })//second then statement closes
+            } //if statement in ajax call closes
+          }//for loop closes
+        })//first then statement closes
+      }//if statement boolean check closes
     })//on click submit event closes
 
 })//document.ready closes
