@@ -71,11 +71,11 @@ $(document).ready(function(){
         })//current card .one event closes
       })//onclick even closes
 
-
+      //On click was switched to auto flip on spell population
     //on click of current card it transforms to the content ('.back') div
-    $('#cardDisplay_Main').on('click','.currentCard',function(){
-      $('#flipper').attr('class', 'flipper');
-    })
+    // $('#cardDisplay_Main').on('click','.currentCard',function(){
+    //   $('#flipper').attr('class', 'flipper');
+    // })
 
 
     //accept input from mystical tutor form
@@ -138,7 +138,9 @@ $(document).ready(function(){
             }//if statement in first ajax call closes
           }//for loop closes
           console.log(spellFound);
-          if(spellFound === false){
+          if(spellFound){
+            $('#flipper').attr('class', 'flipper');
+          }else{
             spellDisplayed = false;
             $('#spell_error_modal').modal('show');
           }
