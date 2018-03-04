@@ -140,6 +140,7 @@ $(document).ready(function(){
           console.log(spellFound);
           if(spellFound){
             $('#flipper').attr('class', 'flipper');
+            $('.submitBtn_display_space').append('<button class="acceptSpell animated flipInX">Accept</button>');
           }else{
             spellDisplayed = false;
             $('#spell_error_modal').modal('show');

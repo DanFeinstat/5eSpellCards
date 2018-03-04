@@ -6,13 +6,15 @@ To-do list:
 
   add specific spell selection input form (mystical tutor) on class selection.  Use boolean to make sure a spell is selected before card flip is available;
     -- Partially complete, needs
-        - animation debug and to
-        - only accept input once
-        -maybe change to auto flip on spell entry
+        - animation debug on tutor input
 
-  Add 'please select a spell' modal and 'could not find that spell' modal for for fail cases;
+
+  MAYBE: Add 'please select a spell' modal;
 
   format content section of spell card;
+    --Mostly done, needs
+      -spell level
+      -unique color for each class on ".back"
 
   add content to flipped current spell card with ajax call;
 
