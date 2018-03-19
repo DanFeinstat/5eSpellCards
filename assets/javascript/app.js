@@ -184,10 +184,10 @@ $(document).ready(function() {
         if (spellFound) {
           $("#flipper").attr("class", "flipper");
           $("#cardContainer").append(
-            '<div class="fixed-bottom">\
+            '<div id="saveBtnContainer" class="fixed-bottom">\
             <div class="col-md-1 ml-auto animated slideInRight">\
-              <button class="btn float-right btn-success">Inscribe</button>\
-              <button class="btn float-right btn-danger">Cancel</button>\
+              <button id="saveSpell" class="btn float-right btn-success">Inscribe</button>\
+              <button id="cancelSpell" class="btn float-right btn-danger">Cancel</button>\
             </div>\
           </div>'
           );
@@ -198,4 +198,19 @@ $(document).ready(function() {
       }); //first then statement closes
     } //if statement boolean check closes
   }); //on click submit event closes
+
+  //spell cancel button click
+  $("#cardContainer").on("click", "#cancelSpell", function() {
+    $("#cardDisplay_Main")
+      .attr("class", "animated hinge")
+      .one(
+        "webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend",
+        function() {
+          $("#cardDisplay_Main").empty();
+          $("#classContainer").html(classSelection);
+          $("#saveBtnContainer").remove();
+          spellDisplayed = false;
+        }
+      );
+  });
 }); //document.ready closes
