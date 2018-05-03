@@ -4,6 +4,7 @@ $(document).ready(function() {
   let spellDisplayed = false;
   let spellFound = false;
   let currentClass = "";
+  let currentSpellData = [];
 
   //click on class button to bring up correct cardback
   $("#classContainer").on("click", ".classBtn", function() {
@@ -168,6 +169,17 @@ $(document).ready(function() {
               url: response.results[i].url,
               method: "GET",
             }).then(function(data) {
+              currentSpellData.push(data.name);
+              currentSpellData.push(data.range);
+              currentSpellData.push(data.duration);
+              currentSpellData.push(data.material);
+              currentSpellData.push(data.ritual);
+              currentSpellData.push(data.components);
+              currentSpellData.push(data.desc);
+              currentSpellData.push(data.higher_level);
+              currentSpellData.push(data.school.name);
+              currentSpellData.push(data.casting_time);
+              console.log(currentSpellData);
               $(".name").append(data.name);
               $(".range").append(data.range);
               $(".duration").append(data.duration);
@@ -208,6 +220,10 @@ $(document).ready(function() {
         "webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend",
         function() {
           location.reload(true);
+          currentSpellData = [];
+          spellDisplayed = false;
+          let currentClass = "";
+          let cardNum = 0;
           // $("#saveBtnContainer").remove();
           // $("#currentCard").remove();
           // spellDisplayed = false;
@@ -217,5 +233,12 @@ $(document).ready(function() {
   });
 
   //spell inscribe button click: saves to database
-  //need to set up database first
+  $("#cardContainer").on("click", "saveSpell", function() {
+    $("#cardDisplay_Main")
+      .attr("class", "animated flipOutX")
+      .one(
+        "webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend",
+        function() {}
+      );
+  });
 }); //document.ready closes
