@@ -12,6 +12,14 @@ router.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+router.get("/register", function(req, res) {
+  res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
+router.get("/login", function(req, res) {
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
 router.post("/api/register", function(req, res) {
   model.newUser(req.body.user_name, req.body.user_password, function(result) {
     //   model.newUser("postman", "testword", function(result) {

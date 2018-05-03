@@ -12,6 +12,7 @@ const app = express();
 app.use(express.static("public"));
 
 //parse application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Import routes and give the server access to them
